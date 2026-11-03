@@ -21,7 +21,9 @@ import { themeScript } from "@/lib/theme";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
-  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+  { rel: "icon", href: "/favicon.svg?v=dr", type: "image/svg+xml" },
+  { rel: "alternate icon", href: "/favicon.ico?v=dr" },
+  { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=dr" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
   {

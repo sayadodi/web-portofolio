@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 
 import { LangToggle } from "@/components/chrome/LangToggle";
 import { ThemeToggle } from "@/components/chrome/ThemeToggle";
@@ -39,7 +39,16 @@ export function Navbar() {
     <>
       <header className="sticky top-0 z-50 border-b border-line bg-ink/75 backdrop-blur-xl">
         <div className="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between gap-3 px-6">
-          <div className="flex items-center">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <Link
+              to="/"
+              className="flex items-center gap-0.5 font-display text-xl font-black tracking-tight text-paper transition-opacity hover:opacity-80"
+              aria-label="Beranda"
+            >
+              <span>Dr</span>
+              <span className="size-1 rounded-full bg-emerald-400" />
+            </Link>
+
             <LangToggle className="md:hidden" />
             <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
               {nav.map((item) => (
