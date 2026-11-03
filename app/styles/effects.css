@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Effects layer
+   Cursor, dot grid, spotlight, scroll progress, reveal, theme icon switching.
+   Everything here degrades to a static, fully usable page.
+   ========================================================================== */
+
+/* ---------- Dot grid ---------- */
+.dot-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1.4px);
+  background-size: 30px 30px;
+  opacity: var(--dot-opacity);
+}
+
+.dot-spot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 560px;
+  height: 560px;
+  margin: -280px 0 0 -280px;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1.5px);
+  background-size: 30px 30px;
+  opacity: 0;
+  -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 68%);
+  mask-image: radial-gradient(circle, #000 0%, transparent 68%);
+  transform: translate3d(var(--mx, -1000px), var(--my, -1000px), 0);
+  transition: opacity 0.4s ease;
+  will-change: transform;
+}
+
+.dot-spot[data-active="true"] {
+  opacity: var(--spot-opacity);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .dot-spot {
+    display: none;
+  }
+}
+
+/* ---------- Custom cursor ---------- */
+.cursor-ring,
+.cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 90;
+  pointer-events: none;
+  border-radius: 9999px;
+  opacity: 0;
+  mix-blend-mode: difference;
+  transition:
+    opacity 0.3s ease,
+    width 0.3s var(--ease-out-expo),
+    height 0.3s var(--ease-out-expo),
+    margin 0.3s var(--ease-out-expo),
+    background-color 0.3s ease;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid rgb(255 255 255 / 0.85);
+}
+
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  background: #fff;
+}
+
+.cursor-ring[data-active="true"] {
+  width: 58px;
+  height: 58px;
+  margin: -29px 0 0 -29px;
+  background: rgb(255 255 255 / 0.14);
+}
+
+.cursor-ring[data-pressed="true"] {
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+}
+
+.cursor-ring[data-visible="true"],
+.cursor-dot[data-visible="true"] {
+  opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-ring,
+  .cursor-dot {
+    display: none;
+  }
+}
+
+/* ---------- Scroll progress ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 100;
+  background: var(--progress);
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* ---------- Hero intro (CSS only: no JS gate on LCP) ---------- */
+@keyframes intro-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.intro {
+  animation: intro-up 0.85s var(--ease-out-expo) both;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.75s var(--ease-out-expo),
+    transform 0.75s var(--ease-out-expo);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Theme icon ---------- */
+.theme-icon-sun {
+  display: none;
+}
+
+[data-theme="light"] .theme-icon-sun {
+  display: block;
+}
+
+[data-theme="light"] .theme-icon-moon {
+  display: none;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .dot-spot,
+  .cursor-ring,
+  .cursor-dot {
+    display: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
