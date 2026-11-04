@@ -34,6 +34,7 @@ export const ui = {
     photoAlt: { id: "Foto Dodi Dwi Riskianto", en: "Portrait of Dodi Dwi Riskianto" },
     viewWork: { id: "Lihat karya", en: "View work" },
     aboutMe: { id: "Tentang saya", en: "About me" },
+    downloadCv: { id: "Unduh CV", en: "Download CV" },
     toolkit: { id: "Perangkat", en: "Toolkit" },
     workEyebrow: { id: "Karya pilihan", en: "Selected work" },
     workTitleA: { id: "Dari ide", en: "From idea" },

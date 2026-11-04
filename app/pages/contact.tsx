@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Check, Copy, Mail, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Download, Mail, MessageCircle } from "lucide-react";
 
 import type { Route } from "./+types/contact";
 import { Container } from "@/components/ui/Container";
@@ -217,6 +217,18 @@ export default function Contact() {
                 >
                   <span>Email: {site.email}</span>
                   <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/documents/cv-dodi-dwi-riskianto.pdf"
+                  download="CV_Dodi_Dwi_Riskianto.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 font-mono text-xs font-semibold text-emerald-400 transition hover:bg-emerald-500 hover:text-ink shadow-sm"
+                >
+                  <Download className="size-3.5" />
+                  <span>Unduh CV Resmi (PDF)</span>
                 </a>
               </li>
               <li>

@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download } from "lucide-react";
 import { Link } from "react-router";
 
 import type { Route } from "./+types/home";
@@ -59,14 +59,24 @@ export default function Home() {
               </p>
 
               <div
-                className="intro mt-8 flex flex-wrap gap-3"
+                className="intro mt-8 flex flex-wrap items-center gap-3"
                 style={{ animationDelay: "220ms" }}
               >
                 <Button to="/projects" size="lg">
                   {t(ui.home.viewWork)}
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Button>
-                <Button href="#tentang" size="lg" variant="outline">
+                <a
+                  href="/documents/cv-dodi-dwi-riskianto.pdf"
+                  download="CV_Dodi_Dwi_Riskianto.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-12 items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-6 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-emerald-400 transition-all duration-200 hover:border-emerald-400 hover:bg-emerald-500 hover:text-ink shadow-sm"
+                >
+                  <Download className="size-4" aria-hidden="true" />
+                  <span>{t(ui.home.downloadCv)}</span>
+                </a>
+                <Button href="#tentang" size="lg" variant="ghost">
                   {t(ui.home.aboutMe)}
                 </Button>
               </div>
