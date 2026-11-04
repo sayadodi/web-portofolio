@@ -14,6 +14,7 @@ import { DotGrid } from "@/components/chrome/DotGrid";
 import { Footer } from "@/components/chrome/Footer";
 import { Navbar } from "@/components/chrome/Navbar";
 import { ScrollProgress } from "@/components/chrome/ScrollProgress";
+import { CvModalProvider } from "@/components/ui/CvModal";
 import { site } from "@/content/site";
 import { ui } from "@/content/ui";
 import { currentLang, LangProvider, useLang } from "@/lib/i18n";
@@ -63,7 +64,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <LangProvider>
-      <Shell />
+      <CvModalProvider>
+        <Shell />
+      </CvModalProvider>
     </LangProvider>
   );
 }

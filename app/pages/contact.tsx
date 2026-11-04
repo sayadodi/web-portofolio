@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { ArrowUpRight, Check, Copy, Download, Mail, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Download, Eye, Mail, MessageCircle } from "lucide-react";
 
 import type { Route } from "./+types/contact";
 import { Container } from "@/components/ui/Container";
+import { useCvModal } from "@/components/ui/CvModal";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/content/site";
@@ -19,6 +20,7 @@ export const meta: Route.MetaFunction = () => [
 
 export default function Contact() {
   const { t } = useLang();
+  const { openCvModal } = useCvModal();
   useLocalizedTitle({
     id: "Kontak — Dodi Dwi Riskianto",
     en: "Contact — Dodi Dwi Riskianto",
@@ -220,16 +222,14 @@ export default function Contact() {
                 </a>
               </li>
               <li>
-                <a
-                  href="/documents/cv-dodi-dwi-riskianto.pdf"
-                  download="CV_Dodi_Dwi_Riskianto.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 font-mono text-xs font-semibold text-emerald-400 transition hover:bg-emerald-500 hover:text-ink shadow-sm"
+                <button
+                  type="button"
+                  onClick={openCvModal}
+                  className="group inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 font-mono text-xs font-semibold text-emerald-400 transition hover:bg-emerald-500 hover:text-ink shadow-sm cursor-pointer"
                 >
-                  <Download className="size-3.5" />
-                  <span>Unduh CV Resmi (PDF)</span>
-                </a>
+                  <Eye className="size-3.5" />
+                  <span>Lihat & Unduh CV Resmi (PDF)</span>
+                </button>
               </li>
               <li>
                 <a

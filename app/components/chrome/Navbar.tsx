@@ -1,9 +1,10 @@
-import { Download, Menu, X } from "lucide-react";
+import { Download, Eye, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 
 import { LangToggle } from "@/components/chrome/LangToggle";
 import { ThemeToggle } from "@/components/chrome/ThemeToggle";
+import { useCvModal } from "@/components/ui/CvModal";
 import { site } from "@/content/site";
 import { ui } from "@/content/ui";
 import { cx } from "@/lib/cx";
@@ -13,6 +14,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const { t } = useLang();
+  const { openCvModal } = useCvModal();
 
   const nav = [
     { to: "/", label: t(ui.nav.home), end: true },
@@ -80,17 +82,15 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href="/documents/cv-dodi-dwi-riskianto.pdf"
-              download="CV_Dodi_Dwi_Riskianto.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 font-mono text-xs font-semibold text-emerald-400 transition-colors duration-200 hover:border-emerald-400 hover:bg-emerald-500 hover:text-ink"
-              title="Unduh Resume / CV Resmi (PDF)"
+            <button
+              type="button"
+              onClick={openCvModal}
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 font-mono text-xs font-semibold text-emerald-400 transition-colors duration-200 hover:border-emerald-400 hover:bg-emerald-500 hover:text-ink cursor-pointer"
+              title="Pratinjau & Unduh CV Resmi"
             >
-              <Download className="size-3.5" aria-hidden="true" />
+              <Eye className="size-3.5" aria-hidden="true" />
               <span>CV</span>
-            </a>
+            </button>
             <LangToggle className="hidden md:flex" />
             <ThemeToggle />
             <button
@@ -138,17 +138,17 @@ export function Navbar() {
             </ul>
 
             <div className="mt-8 flex flex-col gap-4">
-              <a
-                href="/documents/cv-dodi-dwi-riskianto.pdf"
-                download="CV_Dodi_Dwi_Riskianto.pdf"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setOpen(false)}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 font-mono text-xs font-semibold text-ink shadow-md transition hover:bg-emerald-400"
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  openCvModal();
+                }}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 font-mono text-xs font-semibold text-ink shadow-md transition hover:bg-emerald-400 cursor-pointer"
               >
-                <Download className="size-4" />
-                <span>Unduh CV Resmi (PDF)</span>
-              </a>
+                <Eye className="size-4" />
+                <span>Lihat & Unduh CV Resmi (PDF)</span>
+              </button>
 
               <ul className="flex flex-wrap gap-4 pt-1">
                 {site.socials.map((social) => (
