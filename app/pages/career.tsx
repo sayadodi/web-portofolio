@@ -29,7 +29,7 @@ export default function Career() {
           <SectionHeading
             eyebrow={t(ui.career.eyebrow)}
             title={t(ui.career.title)}
-            description="Pengalaman profesional di bidang teknologi informasi, kepemimpinan kreatif multimedia, dan kontribusi akademik."
+            description={t(ui.career.description)}
           />
         </Reveal>
 
@@ -41,7 +41,7 @@ export default function Career() {
                 <Briefcase className="size-3.5" aria-hidden="true" />
               </span>
               <h2 className="font-display text-lg font-bold tracking-[-0.02em] text-paper">
-                Pengalaman Kerja & Organisasi
+                {t(ui.career.experienceHeading)}
               </h2>
             </div>
           </Reveal>
@@ -53,12 +53,12 @@ export default function Career() {
                 <span className="absolute -left-[1.88rem] sm:-left-[2.38rem] top-1.5 size-3 rounded-full border-2 border-line bg-surface transition-colors duration-300 group-hover:border-paper group-hover:bg-paper" />
 
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted">
+                  <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
                     {t(item.period)}
                   </span>
 
                   {item.roleType && (
-                    <span className="rounded-full border border-paper/15 bg-paper/5 px-2.5 py-0.5 font-mono text-[0.55rem] uppercase tracking-wider text-paper/80">
+                    <span className="rounded-full border border-paper/15 bg-paper/5 px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-wider text-paper/80">
                       {t(item.roleType)}
                     </span>
                   )}
@@ -68,7 +68,7 @@ export default function Career() {
                   {t(item.title)}
                 </h3>
 
-                <p className="mt-1 font-mono text-xs font-medium text-emerald-400">
+                <p className="mt-1 font-mono text-xs font-medium text-paper/80">
                   {t(item.org)}
                 </p>
 
@@ -88,7 +88,7 @@ export default function Career() {
                 <GraduationCap className="size-3.5" aria-hidden="true" />
               </span>
               <h2 className="font-display text-lg font-bold tracking-[-0.02em] text-paper">
-                {t(ui.career.education)} Formal
+                {t(ui.career.educationHeading)}
               </h2>
             </div>
           </Reveal>
@@ -98,7 +98,7 @@ export default function Career() {
               <Reveal key={edu.title.id} delay={index * 80}>
                 <div className="flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-6 sm:p-7 transition-colors duration-300 hover:border-paper/40">
                   <div>
-                    <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
+                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
                       {t(edu.period)}
                     </span>
 
@@ -106,7 +106,7 @@ export default function Career() {
                       {t(edu.title)}
                     </h3>
 
-                    <p className="mt-1.5 font-mono text-xs font-medium text-emerald-400">
+                    <p className="mt-1.5 font-mono text-xs font-medium text-paper/80">
                       {t(edu.org)}
                     </p>
 

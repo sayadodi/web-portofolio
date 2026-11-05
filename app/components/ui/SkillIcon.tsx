@@ -15,11 +15,11 @@ export function SkillIcon({
       <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path
           d="M11.91 2C6.9 2 7.21 4.18 7.21 4.18L7.22 6.44H12V7.19H5.16S2 6.83 2 11.84c0 5 2.76 4.82 2.76 4.82h1.64v-2.31s-.09-2.76 2.71-2.76h4.66s2.61.04 2.61-2.55V4.74S16.92 2 11.91 2zM9.34 3.52a.78.78 0 110 1.56.78.78 0 010-1.56z"
-          fill="#387eb8"
+          fill="currentColor"
         />
         <path
           d="M12.09 22c5.01 0 4.7-2.18 4.7-2.18l-.01-2.26H12v-.75h6.84s3.16.36 3.16-4.65c0-5.01-2.76-4.82-2.76-4.82h-1.64v2.31s.09 2.76-2.71 2.76H10.23s-2.61-.04-2.61 2.55v4.3s-.54 2.74 4.47 2.74zm2.57-1.52a.78.78 0 110-1.56.78.78 0 010 1.56z"
-          fill="#ffe052"
+          fill="currentColor"
         />
       </svg>
     );
@@ -29,12 +29,12 @@ export function SkillIcon({
   if (normalized.includes("flutter")) {
     return (
       <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M14.31 2L5 11.31l2.83 2.83L19.97 2h-5.66z" fill="#54C5F8" />
+        <path d="M14.31 2L5 11.31l2.83 2.83L19.97 2h-5.66z" fill="currentColor" />
         <path
           d="M14.31 11.66L8.8 17.17l2.83 2.83 2.68-2.68 5.66 5.68h5.66l-8.5-8.5-2.82-2.84z"
-          fill="#29B6F6"
+          fill="currentColor"
         />
-        <path d="M11.63 14.34l2.68-2.68 2.83 2.83-2.68 2.68z" fill="#01579B" />
+        <path d="M11.63 14.34l2.68-2.68 2.83 2.83-2.68 2.68z" fill="currentColor" />
       </svg>
     );
   }
@@ -42,7 +42,7 @@ export function SkillIcon({
   // Laravel
   if (normalized.includes("laravel")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="#FF2D20" aria-hidden="true">
+      <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M23.639 5.215L12.36.035a.87.87 0 0 0-.72 0L.361 5.215a.87.87 0 0 0-.361.76v12.05a.87.87 0 0 0 .361.76l11.279 5.18a.87.87 0 0 0 .72 0l11.279-5.18a.87.87 0 0 0 .361-.76V5.975a.87.87 0 0 0-.361-.76zm-12.039 16.59-10.039-4.61V6.92l10.039 4.61v10.275zm.76-11.025L2.571 6.27 12 1.94l9.429 4.33-9.789 4.51zm9.279 6.415-10.039 4.61V11.53l10.039-4.61v10.27z" />
       </svg>
     );
@@ -51,7 +51,7 @@ export function SkillIcon({
   // Tailwind CSS
   if (normalized.includes("tailwind")) {
     return (
-      <svg className={className} viewBox="0 0 24 24" fill="#38BDF8" aria-hidden="true">
+      <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" />
       </svg>
     );
@@ -59,17 +59,17 @@ export function SkillIcon({
 
   // AI Knowledge & Agents
   if (normalized.includes("ai") || normalized.includes("agent")) {
-    return <Sparkles className={`${className} text-indigo-400`} aria-hidden="true" />;
+    return <Sparkles className={className} aria-hidden="true" />;
   }
 
   // Microsoft Office
   if (normalized.includes("office") || normalized.includes("microsoft")) {
     return (
       <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="2" y="2" width="9.5" height="9.5" rx="1.5" fill="#F25022" />
-        <rect x="12.5" y="2" width="9.5" height="9.5" rx="1.5" fill="#7FBA00" />
-        <rect x="2" y="12.5" width="9.5" height="9.5" rx="1.5" fill="#00A4EF" />
-        <rect x="12.5" y="12.5" width="9.5" height="9.5" rx="1.5" fill="#FFB900" />
+        <rect x="2" y="2" width="9.5" height="9.5" rx="1.5" fill="currentColor" />
+        <rect x="12.5" y="2" width="9.5" height="9.5" rx="1.5" fill="currentColor" />
+        <rect x="2" y="12.5" width="9.5" height="9.5" rx="1.5" fill="currentColor" />
+        <rect x="12.5" y="12.5" width="9.5" height="9.5" rx="1.5" fill="currentColor" />
       </svg>
     );
   }
@@ -78,7 +78,7 @@ export function SkillIcon({
   if (normalized.includes("premiere")) {
     return (
       <span
-        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-[#9999FF]/50 bg-[#00005B] font-sans text-[7.5px] font-black leading-none text-[#9999FF]"
+        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-line bg-elevated font-sans text-[7.5px] font-black leading-none text-paper"
         aria-hidden="true"
       >
         Pr
@@ -90,7 +90,7 @@ export function SkillIcon({
   if (normalized.includes("after effects")) {
     return (
       <span
-        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-[#9999FF]/50 bg-[#00005B] font-sans text-[7.5px] font-black leading-none text-[#9999FF]"
+        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-line bg-elevated font-sans text-[7.5px] font-black leading-none text-paper"
         aria-hidden="true"
       >
         Ae
@@ -102,7 +102,7 @@ export function SkillIcon({
   if (normalized.includes("lightroom")) {
     return (
       <span
-        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-[#31A8FF]/50 bg-[#001E36] font-sans text-[7.5px] font-black leading-none text-[#31A8FF]"
+        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-line bg-elevated font-sans text-[7.5px] font-black leading-none text-paper"
         aria-hidden="true"
       >
         Lr
@@ -114,7 +114,7 @@ export function SkillIcon({
   if (normalized.includes("photoshop")) {
     return (
       <span
-        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-[#31A8FF]/50 bg-[#001E36] font-sans text-[7.5px] font-black leading-none text-[#31A8FF]"
+        className="flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-line bg-elevated font-sans text-[7.5px] font-black leading-none text-paper"
         aria-hidden="true"
       >
         Ps
@@ -124,12 +124,12 @@ export function SkillIcon({
 
   // Videography
   if (normalized.includes("videograph") || normalized.includes("video")) {
-    return <Video className={`${className} text-emerald-400`} aria-hidden="true" />;
+    return <Video className={className} aria-hidden="true" />;
   }
 
   // Photography
   if (normalized.includes("photograph") || normalized.includes("foto")) {
-    return <Camera className={`${className} text-amber-400`} aria-hidden="true" />;
+    return <Camera className={className} aria-hidden="true" />;
   }
 
   // Fallback icon

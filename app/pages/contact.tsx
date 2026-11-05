@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { ArrowUpRight, Check, Copy, Download, Eye, Mail, MessageCircle } from "lucide-react";
+import {
+  ArrowUpRight,
+  Check,
+  Copy,
+  Eye,
+  Mail,
+  MessageCircle,
+} from "lucide-react";
 
 import type { Route } from "./+types/contact";
 import { Container } from "@/components/ui/Container";
@@ -18,25 +25,32 @@ export const meta: Route.MetaFunction = () => [
   },
 ];
 
+type CopyStatus = "idle" | "copied" | "error";
+
 export default function Contact() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const { openCvModal } = useCvModal();
   useLocalizedTitle({
     id: "Kontak — Dodi Dwi Riskianto",
     en: "Contact — Dodi Dwi Riskianto",
   });
 
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<CopyStatus>("idle");
 
-  function copyEmail() {
-    navigator.clipboard.writeText(site.email).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(site.email);
+      setCopyStatus("copied");
+    } catch {
+      setCopyStatus("error");
+    }
+    window.setTimeout(() => setCopyStatus("idle"), 2200);
   }
 
   const whatsappMessage = encodeURIComponent(
-    "Halo Dodi, saya melihat website portofolio Anda dan tertarik untuk berdiskusi."
+    lang === "id"
+      ? "Halo Dodi, saya melihat website portofolio Anda dan tertarik untuk berdiskusi."
+      : "Hello Dodi, I saw your portfolio website and would like to talk.",
   );
   const waShortcutUrl = `https://wa.me/6282230862810?text=${whatsappMessage}`;
 
@@ -47,109 +61,123 @@ export default function Contact() {
           <SectionHeading
             eyebrow={t(ui.contact.eyebrow)}
             title={t(ui.contact.title)}
-            description="Terbuka untuk diskusi proyek pengembangan aplikasi web, produksi multimedia kreatif, kerja sama profesional, atau sekadar bertukar ide."
+            description={t(ui.contact.description)}
           />
         </Reveal>
 
+        <p role="status" aria-live="polite" className="sr-only">
+          {copyStatus === "copied"
+            ? t(ui.contact.copied)
+            : copyStatus === "error"
+              ? t(ui.contact.copyFailed)
+              : ""}
+        </p>
+
         {/* ---------------- Primary Contact Channels ---------------- */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Card 1: WhatsApp (Recommended Shortcut) */}
+          {/* WhatsApp */}
           <Reveal delay={60}>
-            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-emerald-500/30 bg-surface p-7 transition-all duration-300 hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-950/20 sm:p-8">
+            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-paper/25 bg-surface p-7 transition-colors duration-300 hover:border-paper/50 sm:p-8">
               <div>
-                <div className="flex items-center justify-between">
-                  <span className="flex size-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
-                    <MessageCircle className="size-5" />
+                <div className="flex items-center justify-between gap-3">
+                  <span className="flex size-11 items-center justify-center rounded-xl border border-line bg-paper/5 text-paper">
+                    <MessageCircle className="size-5" aria-hidden="true" />
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[0.6rem] font-medium uppercase tracking-wider text-emerald-400">
-                    <span className="size-1.5 animate-pulse rounded-full bg-emerald-400" />
-                    Respons Cepat
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-elevated px-2.5 py-1 font-mono text-[0.7rem] font-medium uppercase tracking-wider text-muted">
+                    <span className="size-1.5 rounded-full bg-paper" aria-hidden="true" />
+                    {t(ui.contact.quickResponse)}
                   </span>
                 </div>
 
                 <h2 className="mt-6 font-display text-xl font-bold tracking-[-0.02em] text-paper">
                   WhatsApp
                 </h2>
-                <p className="mt-1 font-mono text-base font-semibold text-emerald-400">
+                <p className="mt-1 font-mono text-base font-semibold text-paper">
                   +62 822-3086-2810
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-muted">
-                  Jalur tercepat untuk berdiskusi santai, konsultasi kebutuhan proyek, atau koordinasi langsung via chat.
+                <p className="mt-3 text-sm leading-relaxed text-muted">
+                  {t(ui.contact.whatsappDescription)}
                 </p>
               </div>
 
-              <div className="mt-8 border-t border-line/60 pt-5">
+              <div className="mt-8 border-t border-line pt-5">
                 <a
                   href={waShortcutUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 font-mono text-xs font-semibold text-ink shadow-md transition duration-200 hover:bg-emerald-400 hover:scale-[1.01]"
+                  className="group/btn inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-paper px-5 font-mono text-xs font-semibold text-ink transition-opacity hover:opacity-90"
                 >
-                  <span>Buka Chat WhatsApp</span>
-                  <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+                  <span>{t(ui.contact.whatsappCta)}</span>
+                  <ArrowUpRight
+                    className="size-3.5 transition-transform duration-200 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </a>
               </div>
             </div>
           </Reveal>
 
-          {/* Card 2: Email */}
+          {/* Email */}
           <Reveal delay={120}>
-            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-7 transition-all duration-300 hover:border-paper/40 hover:shadow-xl sm:p-8">
+            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-7 transition-colors duration-300 hover:border-paper/40 sm:p-8">
               <div>
-                <div className="flex items-center justify-between">
-                  <span className="flex size-10 items-center justify-center rounded-xl bg-paper/5 text-paper">
-                    <Mail className="size-5" />
+                <div className="flex items-center justify-between gap-3">
+                  <span className="flex size-11 items-center justify-center rounded-xl border border-line bg-paper/5 text-paper">
+                    <Mail className="size-5" aria-hidden="true" />
                   </span>
-                  <span className="rounded-full border border-line bg-elevated px-2.5 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-muted">
-                    Email Resmi
+                  <span className="rounded-full border border-line bg-elevated px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-wider text-muted">
+                    {t(ui.contact.officialEmail)}
                   </span>
                 </div>
 
                 <h2 className="mt-6 font-display text-xl font-bold tracking-[-0.02em] text-paper">
                   Email
                 </h2>
-                <p className="mt-1 font-mono text-sm font-semibold text-paper break-all">
+                <p className="mt-1 break-all font-mono text-sm font-semibold text-paper">
                   {site.email}
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-muted">
-                  Tersedia untuk pengiriman berkas, proposal resmi, kerja sama formal institusi, dan surat menyurat.
+                <p className="mt-3 text-sm leading-relaxed text-muted">
+                  {t(ui.contact.emailDescription)}
                 </p>
               </div>
 
-              <div className="mt-8 flex items-center gap-2 border-t border-line/60 pt-5">
+              <div className="mt-8 flex items-center gap-2 border-t border-line pt-5">
                 <a
                   href={`mailto:${site.email}`}
-                  className="group/btn inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-paper px-4 py-3 font-mono text-xs font-semibold text-ink transition duration-200 hover:opacity-90"
+                  className="group/btn inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full bg-paper px-4 font-mono text-xs font-semibold text-ink transition-opacity hover:opacity-90"
                 >
-                  <span>Kirim Email</span>
-                  <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+                  <span>{t(ui.contact.emailCta)}</span>
+                  <ArrowUpRight
+                    className="size-3.5 transition-transform duration-200 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </a>
 
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="inline-flex items-center justify-center rounded-xl border border-line bg-elevated p-3 text-muted transition hover:border-paper/40 hover:text-paper cursor-pointer"
-                  title="Salin alamat email"
-                  aria-label="Salin alamat email"
+                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-line bg-elevated text-muted transition-colors hover:border-paper/40 hover:text-paper"
+                  title={t(ui.contact.copyEmail)}
+                  aria-label={t(ui.contact.copyEmail)}
                 >
-                  {copied ? (
-                    <Check className="size-4 text-emerald-400" />
+                  {copyStatus === "copied" ? (
+                    <Check className="size-4" aria-hidden="true" />
                   ) : (
-                    <Copy className="size-4" />
+                    <Copy className="size-4" aria-hidden="true" />
                   )}
                 </button>
               </div>
             </div>
           </Reveal>
 
-          {/* Card 3: GitHub */}
+          {/* GitHub */}
           <Reveal delay={180}>
-            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-7 transition-all duration-300 hover:border-paper/40 hover:shadow-xl sm:p-8">
+            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-7 transition-colors duration-300 hover:border-paper/40 sm:p-8">
               <div>
-                <div className="flex items-center justify-between">
-                  <span className="flex size-10 items-center justify-center rounded-xl bg-paper/5 text-paper">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="flex size-11 items-center justify-center rounded-xl border border-line bg-paper/5 text-paper">
                     <svg
                       className="size-5 fill-current"
                       viewBox="0 0 24 24"
@@ -162,8 +190,8 @@ export default function Contact() {
                       />
                     </svg>
                   </span>
-                  <span className="rounded-full border border-line bg-elevated px-2.5 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-muted">
-                    Kode & Proyek
+                  <span className="rounded-full border border-line bg-elevated px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-wider text-muted">
+                    {t(ui.contact.codeProjects)}
                   </span>
                 </div>
 
@@ -174,20 +202,23 @@ export default function Contact() {
                   github.com/sayadodi
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-muted">
-                  Lihat repositori kode sumber, riwayat commit, eksplorasi kecerdasan buatan, dan proyek open source saya.
+                <p className="mt-3 text-sm leading-relaxed text-muted">
+                  {t(ui.contact.githubDescription)}
                 </p>
               </div>
 
-              <div className="mt-8 border-t border-line/60 pt-5">
+              <div className="mt-8 border-t border-line pt-5">
                 <a
                   href="https://github.com/sayadodi"
                   target="_blank"
                   rel="noreferrer"
-                  className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl border border-line bg-elevated px-5 py-3 font-mono text-xs font-semibold text-paper transition duration-200 hover:border-paper/50 hover:bg-surface"
+                  className="group/btn inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-line bg-elevated px-5 font-mono text-xs font-semibold text-paper transition-colors hover:border-paper/50 hover:bg-surface"
                 >
-                  <span>Kunjungi @sayadodi</span>
-                  <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+                  <span>{t(ui.contact.githubCta)}</span>
+                  <ArrowUpRight
+                    className="size-3.5 transition-transform duration-200 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </a>
               </div>
             </div>
@@ -197,38 +228,44 @@ export default function Contact() {
         {/* ---------------- Direct Shortcut Links ---------------- */}
         <Reveal delay={240}>
           <div className="mt-16 rounded-2xl border border-line bg-surface/60 p-6 sm:p-8">
-            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-              Tautan Cepat Kontak
-            </h3>
+            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+              {t(ui.contact.quickLinks)}
+            </h2>
             <ul className="mt-4 flex flex-wrap gap-3">
               <li>
                 <a
                   href={waShortcutUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 font-mono text-xs font-medium text-emerald-400 transition hover:bg-emerald-500 hover:text-ink"
+                  className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-paper/5 px-4 font-mono text-xs font-medium text-paper transition-colors hover:border-paper/50 hover:bg-paper/10"
                 >
                   <span>WhatsApp: 082230862810</span>
-                  <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight
+                    className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="group inline-flex items-center gap-2 rounded-full border border-line bg-elevated px-4 py-2 font-mono text-xs text-paper transition hover:border-paper/40"
+                  className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-elevated px-4 font-mono text-xs text-paper transition-colors hover:border-paper/40"
                 >
                   <span>Email: {site.email}</span>
-                  <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight
+                    className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </a>
               </li>
               <li>
                 <button
                   type="button"
                   onClick={openCvModal}
-                  className="group inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 font-mono text-xs font-semibold text-emerald-400 transition hover:bg-emerald-500 hover:text-ink shadow-sm cursor-pointer"
+                  className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-paper/5 px-4 font-mono text-xs font-semibold text-paper transition-colors hover:border-paper/50 hover:bg-paper/10"
                 >
-                  <Eye className="size-3.5" />
-                  <span>Lihat & Unduh CV Resmi (PDF)</span>
+                  <Eye className="size-3.5" aria-hidden="true" />
+                  <span>{t(ui.chrome.viewCv)}</span>
                 </button>
               </li>
               <li>
@@ -236,10 +273,13 @@ export default function Contact() {
                   href="https://github.com/sayadodi"
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full border border-line bg-elevated px-4 py-2 font-mono text-xs text-paper transition hover:border-paper/40"
+                  className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-elevated px-4 font-mono text-xs text-paper transition-colors hover:border-paper/40"
                 >
                   <span>GitHub: @sayadodi</span>
-                  <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight
+                    className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </a>
               </li>
             </ul>

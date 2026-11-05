@@ -19,14 +19,26 @@ export const ui = {
     toggleLang: { id: "Ganti bahasa", en: "Switch language" },
     openMenu: { id: "Buka menu", en: "Open menu" },
     closeMenu: { id: "Tutup menu", en: "Close menu" },
+    menuTitle: { id: "Menu navigasi", en: "Navigation menu" },
     home: { id: "Beranda", en: "Home" },
     loading: { id: "Memuat…", en: "Loading…" },
+    viewCv: { id: "Lihat & Unduh CV", en: "View & download CV" },
+    closeCv: { id: "Tutup pratinjau CV", en: "Close CV preview" },
+    cvTitle: { id: "Curriculum Vitae (CV) — Dodi Dwi Riskianto", en: "Curriculum Vitae — Dodi Dwi Riskianto" },
+    cvSubtitle: {
+      id: "S1 Teknik Informatika · Software Engineer & Multimedia Creative",
+      en: "B.Sc. Informatics · Software Engineer & Multimedia Creative",
+    },
+    openNewTab: { id: "Buka tab baru", en: "Open in new tab" },
+    downloadPdf: { id: "Unduh PDF", en: "Download PDF" },
+    verified: { id: "Terverifikasi", en: "Verified" },
   },
 
   footer: {
     navigate: { id: "Navigasi", en: "Navigate" },
     elsewhere: { id: "Tautan", en: "Elsewhere" },
     built: { id: "Dibangun dengan React", en: "Built with React" },
+    navLabel: { id: "Navigasi footer", en: "Footer navigation" },
   },
 
   home: {
@@ -74,7 +86,16 @@ export const ui = {
   career: {
     eyebrow: { id: "Karier", en: "Career" },
     title: { id: "Pengalaman.", en: "Experience." },
+    description: {
+      id: "Pengalaman profesional di bidang teknologi informasi, kepemimpinan kreatif multimedia, dan kontribusi akademik.",
+      en: "Professional experience across information technology, creative multimedia leadership, and academic contribution.",
+    },
+    experienceHeading: {
+      id: "Pengalaman Kerja & Organisasi",
+      en: "Work & Organisational Experience",
+    },
     education: { id: "Pendidikan", en: "Education" },
+    educationHeading: { id: "Pendidikan Formal", en: "Formal Education" },
     present: { id: "Sekarang", en: "Now" },
   },
 
@@ -96,15 +117,89 @@ export const ui = {
       en: "Official copyright registrations from the Ministry of Law and Human Rights Republic of Indonesia.",
     },
     certificatesHeading: { id: "Sertifikasi & Penghargaan", en: "Certifications & Awards" },
+    certificatesSubtitle: {
+      id: "Sertifikasi kompetensi profesi BNSP, program nasional Kampus Merdeka, kejuaraan IT, dan praktik industri resmi.",
+      en: "BNSP professional competency certifications, Kampus Merdeka national programs, IT competitions, and formal industry practice.",
+    },
+    registrationNumber: { id: "Nomor Pencatatan", en: "Registration number" },
+    applicationNumber: { id: "Nomor Permohonan", en: "Application number" },
+    copyrightHolder: { id: "Pemegang Hak Cipta", en: "Copyright holder" },
+    registeredCreator: { id: "Pencipta Terdaftar", en: "Registered creator" },
+    openHakiPreview: {
+      id: "Buka pratinjau bukti dokumen HAKI",
+      en: "Open HAKI document preview",
+    },
+    hakiProofAlt: {
+      id: "Bukti Dokumen HAKI Kemenkumham RI",
+      en: "HAKI document proof, Ministry of Law & Human Rights RI",
+    },
+    viewProof: { id: "Lihat Bukti", en: "View proof" },
+    twoPages: { id: "2 Halaman", en: "2 pages" },
+    previewCertificate: { id: "Pratinjau sertifikat", en: "Preview certificate" },
+    previewBadge: { id: "Pratinjau", en: "Preview" },
+    viewCertificate: { id: "Lihat Sertifikat", en: "View certificate" },
+    openOfficialFile: {
+      id: "Buka / Unduh File Resmi",
+      en: "Open / download official file",
+    },
+    openOfficialPdf: { id: "Buka Dokumen PDF Resmi", en: "Open official PDF" },
+    previewProof: { id: "Pratinjau Bukti", en: "Preview proof" },
+    legalNote: {
+      id: "Dokumen Sah Kemenkumham RI",
+      en: "Official document, Ministry of Law & Human Rights RI",
+    },
+    previewTitle: { id: "Pratinjau dokumen", en: "Document preview" },
+    closePreview: { id: "Tutup pratinjau dokumen", en: "Close document preview" },
+    officialVerified: {
+      id: "Dokumen Resmi Terverifikasi",
+      en: "Verified official document",
+    },
+    officialDocument: { id: "Dokumen Resmi", en: "Official document" },
+    documentNumber: { id: "Nomor", en: "Number" },
+    pageLabel: { id: "Halaman", en: "Page" },
+    page1Long: { id: "Hal 1: Sertifikat Hak Cipta", en: "Page 1: Copyright certificate" },
+    page1Short: { id: "Hal 1: Sertifikat", en: "Page 1: Certificate" },
+    page2Long: {
+      id: "Hal 2: Lampiran Pencipta (Dodi)",
+      en: "Page 2: Author appendix (Dodi)",
+    },
+    page2Short: { id: "Hal 2: Lampiran", en: "Page 2: Appendix" },
+    noteLabel: { id: "Catatan", en: "Note" },
+    creatorNote: {
+      id: "Pada Halaman 2 (Lampiran Pencipta), nama DODI DWI RISKIANTO tercatat resmi pada nomor urut 4 sebagai Pencipta Ciptaan Poster PKM ini.",
+      en: "On page 2 (author appendix), the name DODI DWI RISKIANTO is officially recorded at number 4 as the creator of this PKM poster.",
+    },
   },
 
   contact: {
     eyebrow: { id: "Kontak", en: "Contact" },
     title: { id: "Mari terhubung.", en: "Let's connect." },
     description: {
-      id: "Terbuka untuk diskusi, berbagi pengalaman, atau sekadar menyapa. Silakan hubungi lewat email atau media sosial.",
-      en: "Open to conversations, shared experience, or just saying hello. Reach out by email or social media.",
+      id: "Terbuka untuk diskusi pengembangan aplikasi web, produksi multimedia kreatif, kerja sama profesional, atau sekadar bertukar ide.",
+      en: "Open to web application projects, creative multimedia production, professional collaboration, or simply exchanging ideas.",
     },
+    quickResponse: { id: "Respons Cepat", en: "Fast response" },
+    whatsappDescription: {
+      id: "Jalur tercepat untuk berdiskusi santai, konsultasi kebutuhan proyek, atau koordinasi langsung via chat.",
+      en: "The fastest way to chat about a project, ask a question, or coordinate directly.",
+    },
+    whatsappCta: { id: "Buka Chat WhatsApp", en: "Open WhatsApp chat" },
+    officialEmail: { id: "Email Resmi", en: "Official email" },
+    emailDescription: {
+      id: "Tersedia untuk pengiriman berkas, proposal resmi, kerja sama formal institusi, dan surat menyurat.",
+      en: "Available for documents, formal proposals, institutional collaboration, and correspondence.",
+    },
+    emailCta: { id: "Kirim Email", en: "Send email" },
+    copyEmail: { id: "Salin alamat email", en: "Copy email address" },
+    copied: { id: "Email berhasil disalin", en: "Email copied" },
+    copyFailed: { id: "Gagal menyalin email", en: "Could not copy email" },
+    codeProjects: { id: "Kode & Proyek", en: "Code & projects" },
+    githubDescription: {
+      id: "Lihat repositori kode sumber, riwayat commit, eksplorasi kecerdasan buatan, dan proyek open source saya.",
+      en: "Browse source repositories, commit history, artificial intelligence experiments, and open-source projects.",
+    },
+    githubCta: { id: "Kunjungi @sayadodi", en: "Visit @sayadodi" },
+    quickLinks: { id: "Tautan Cepat Kontak", en: "Quick contact links" },
   },
 
   project: {
@@ -117,6 +212,8 @@ export const ui = {
     categoryMultimedia: { id: "Multimedia", en: "Multimedia" },
     notFound: { id: "Proyek tidak ditemukan", en: "Project not found" },
     backToProjects: { id: "Kembali ke daftar proyek", en: "Back to projects" },
+    private: { id: "Privat", en: "Private" },
+    visit: { id: "Kunjungi", en: "Visit" },
   },
 
   notFound: {

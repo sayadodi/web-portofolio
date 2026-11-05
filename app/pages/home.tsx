@@ -42,7 +42,7 @@ export default function Home() {
             <div className="order-2 md:order-1">
               <div className="intro flex items-center gap-3">
                 <span className="size-1.5 rounded-full bg-paper" aria-hidden="true" />
-                <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-muted sm:text-[0.65rem] sm:tracking-[0.28em]">
+                <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted sm:text-[0.7rem] sm:tracking-[0.28em]">
                   {t(ui.home.badge)}
                 </p>
               </div>
@@ -71,7 +71,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={openCvModal}
-                  className="inline-flex h-12 items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-6 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-emerald-400 transition-all duration-200 hover:border-emerald-400 hover:bg-emerald-500 hover:text-ink shadow-sm cursor-pointer"
+                  className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-full border border-line px-6 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-paper transition-all duration-200 hover:border-paper/50 hover:bg-paper/5"
                 >
                   <Eye className="size-4" aria-hidden="true" />
                   <span>{t(ui.home.downloadCv)}</span>
@@ -104,7 +104,7 @@ export default function Home() {
                   />
                 </div>
 
-                <figcaption className="mt-4 flex items-center justify-between gap-4 font-mono text-[0.55rem] uppercase tracking-[0.22em] text-muted">
+                <figcaption className="mt-4 flex items-center justify-between gap-4 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted">
                   <span>{site.name}</span>
                   <span>2026</span>
                 </figcaption>
@@ -135,7 +135,7 @@ export default function Home() {
               <dl className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-2">
                 {about.facts.map((fact) => (
                   <div key={fact.label.id}>
-                    <dt className="font-mono text-[0.55rem] uppercase tracking-[0.24em] text-muted">
+                    <dt className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-muted">
                       {t(fact.label)}
                     </dt>
                     <dd className="mt-1 text-sm">{t(fact.value)}</dd>
@@ -151,7 +151,7 @@ export default function Home() {
       <section className="relative border-y border-line bg-surface/40">
         <Container className="py-6">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="mr-2 font-mono text-[0.6rem] uppercase tracking-[0.24em] text-muted">
+            <span className="mr-2 font-mono text-[0.7rem] uppercase tracking-[0.24em] text-muted">
               {t(ui.home.toolkit)}
             </span>
             {allSkills.map((skill) => (
@@ -230,7 +230,7 @@ export default function Home() {
                   className="group flex flex-col justify-between gap-10 rounded-3xl border border-line bg-surface p-7 transition-colors duration-300 hover:border-paper/40 sm:p-9"
                 >
                   <div>
-                    <p className="font-mono text-[0.55rem] uppercase tracking-[0.24em] text-muted">
+                    <p className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-muted">
                       {item.eyebrow}
                     </p>
                     <h2 className="mt-4 font-display text-2xl font-bold tracking-[-0.03em]">

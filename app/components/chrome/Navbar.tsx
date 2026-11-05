@@ -1,4 +1,4 @@
-import { Download, Eye, Menu, X } from "lucide-react";
+import { Eye, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 
@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/chrome/ThemeToggle";
 import { useCvModal } from "@/components/ui/CvModal";
 import { site } from "@/content/site";
 import { ui } from "@/content/ui";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { cx } from "@/lib/cx";
 import { useLang } from "@/lib/i18n";
 
@@ -15,6 +16,7 @@ export function Navbar() {
   const location = useLocation();
   const { t } = useLang();
   const { openCvModal } = useCvModal();
+  const menuRef = useFocusTrap<HTMLDivElement>(open, () => setOpen(false));
 
   const nav = [
     { to: "/", label: t(ui.nav.home), end: true },
@@ -30,6 +32,7 @@ export function Navbar() {
 
   useEffect(() => {
     if (!open) return;
+
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -40,15 +43,15 @@ export function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-line bg-ink/75 backdrop-blur-xl">
-        <div className="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between gap-3 px-6">
-          <div className="flex items-center gap-4 sm:gap-6">
+        <div className="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+          <div className="flex items-center gap-3 sm:gap-5">
             <Link
               to="/"
-              className="flex items-center gap-0.5 font-display text-xl font-black tracking-tight text-paper transition-opacity hover:opacity-80"
-              aria-label="Beranda"
+              className="flex items-center gap-1 font-display text-xl font-black tracking-tight text-paper transition-opacity hover:opacity-80"
+              aria-label={t(ui.chrome.home)}
             >
               <span>Dr</span>
-              <span className="size-1 rounded-full bg-emerald-400" />
+              <span className="size-1 rounded-full bg-paper" aria-hidden="true" />
             </Link>
 
             <LangToggle className="md:hidden" />
@@ -60,7 +63,7 @@ export function Navbar() {
                   end={item.end}
                   className={({ isActive }) =>
                     cx(
-                      "relative rounded-full px-4 py-2.5 text-sm transition-colors duration-200",
+                      "relative rounded-full px-4 py-3 text-sm transition-colors duration-200",
                       isActive ? "bg-paper text-ink" : "text-muted hover:text-paper",
                     )
                   }
@@ -85,8 +88,8 @@ export function Navbar() {
             <button
               type="button"
               onClick={openCvModal}
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 font-mono text-xs font-semibold text-emerald-400 transition-colors duration-200 hover:border-emerald-400 hover:bg-emerald-500 hover:text-ink cursor-pointer"
-              title="Pratinjau & Unduh CV Resmi"
+              className="hidden min-h-11 items-center gap-1.5 rounded-full border border-line bg-paper/5 px-4 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-paper transition-colors duration-200 hover:border-paper/50 hover:bg-paper hover:text-ink sm:inline-flex"
+              aria-label={t(ui.chrome.viewCv)}
             >
               <Eye className="size-3.5" aria-hidden="true" />
               <span>CV</span>
@@ -99,7 +102,7 @@ export function Navbar() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={t(open ? ui.chrome.closeMenu : ui.chrome.openMenu)}
-              className="flex size-10 items-center justify-center rounded-full border border-line md:hidden"
+              className="flex size-11 items-center justify-center rounded-full border border-line md:hidden"
             >
               {open ? (
                 <X className="size-4" aria-hidden="true" />
@@ -113,7 +116,11 @@ export function Navbar() {
 
       {open && (
         <div
+          ref={menuRef}
           id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t(ui.chrome.menuTitle)}
           className="fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto bg-ink/95 backdrop-blur-xl md:hidden"
         >
           <nav aria-label="Mobile" className="mx-auto w-full max-w-6xl px-6 py-6">
@@ -124,12 +131,12 @@ export function Navbar() {
                     to={item.to}
                     end={item.end}
                     onClick={() => setOpen(false)}
-                    className="flex items-baseline justify-between border-b border-line py-5"
+                    className="flex min-h-[64px] items-center justify-between border-b border-line py-4"
                   >
                     <span className="font-display text-3xl font-extrabold tracking-[-0.04em]">
                       {item.label}
                     </span>
-                    <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
+                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
                       0{index + 1}
                     </span>
                   </NavLink>
@@ -144,20 +151,20 @@ export function Navbar() {
                   setOpen(false);
                   openCvModal();
                 }}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 font-mono text-xs font-semibold text-ink shadow-md transition hover:bg-emerald-400 cursor-pointer"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-paper px-4 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-ink transition-opacity hover:opacity-90"
               >
-                <Eye className="size-4" />
-                <span>Lihat & Unduh CV Resmi (PDF)</span>
+                <Eye className="size-4" aria-hidden="true" />
+                <span>{t(ui.chrome.viewCv)}</span>
               </button>
 
-              <ul className="flex flex-wrap gap-4 pt-1">
+              <ul className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
                 {site.socials.map((social) => (
                   <li key={social.label}>
                     <a
                       href={social.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted"
+                      className="inline-flex min-h-11 items-center font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted hover:text-paper"
                     >
                       {social.label}
                     </a>

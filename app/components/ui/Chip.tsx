@@ -12,7 +12,7 @@ export function Chip({
   return (
     <span
       className={cx(
-        "inline-flex items-center rounded-full border border-line px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-muted",
+        "inline-flex items-center rounded-full border border-line px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted",
         className,
       )}
     >

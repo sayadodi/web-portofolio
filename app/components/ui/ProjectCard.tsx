@@ -49,24 +49,24 @@ export function ProjectCard({
             <span className="font-display text-5xl font-extrabold tracking-[-0.05em] text-muted/30">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
               {project.year}
             </span>
           </div>
         )}
 
-        <span className="absolute left-4 top-4 rounded-full border border-line bg-ink/70 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.18em] backdrop-blur">
+        <span className="absolute left-4 top-4 rounded-full border border-line bg-ink/70 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.18em] backdrop-blur">
           {categoryLabel}
         </span>
 
         {project.isPrivate ? (
-          <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-line bg-ink/80 px-2.5 py-1 font-mono text-[0.55rem] uppercase tracking-[0.18em] text-muted backdrop-blur">
+          <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-line bg-ink/80 px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted backdrop-blur">
             <Lock className="size-3 text-muted" aria-hidden="true" />
-            Privat
+            {t(ui.project.private)}
           </span>
         ) : project.links.length > 0 ? (
-          <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-line bg-ink/80 px-2.5 py-1 font-mono text-[0.55rem] uppercase tracking-[0.18em] text-paper backdrop-blur">
-            <span className="size-1.5 rounded-full bg-emerald-400" />
+          <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-line bg-ink/80 px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-paper backdrop-blur">
+            <span className="size-1.5 rounded-full bg-paper" aria-hidden="true" />
             {project.links[0]?.label}
           </span>
         ) : null}
@@ -87,7 +87,7 @@ export function ProjectCard({
           {t(project.summary)}
         </p>
 
-        <p className="mt-auto pt-2 font-mono text-[0.6rem] uppercase leading-relaxed tracking-[0.16em] text-muted">
+        <p className="mt-auto pt-2 font-mono text-[0.7rem] uppercase leading-relaxed tracking-[0.16em] text-muted">
           {project.stack.join(" · ")}
         </p>
       </div>

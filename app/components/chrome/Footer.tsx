@@ -28,8 +28,8 @@ export function Footer() {
             </p>
           </div>
 
-          <nav aria-label="Footer">
-            <p className="font-mono text-[0.6rem] uppercase tracking-[0.24em] text-muted">
+          <nav aria-label={t(ui.footer.navLabel)}>
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-muted">
               {t(ui.footer.navigate)}
             </p>
             <ul className="mt-4 space-y-2 text-sm">
@@ -37,7 +37,7 @@ export function Footer() {
                 <li key={link.to}>
                   <Link
                     to={link.to}
-                    className="text-muted transition-colors hover:text-paper"
+                    className="inline-flex min-h-6 items-center text-muted transition-colors hover:text-paper"
                   >
                     {link.label}
                   </Link>
@@ -47,7 +47,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <p className="font-mono text-[0.6rem] uppercase tracking-[0.24em] text-muted">
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-muted">
               {t(ui.footer.elsewhere)}
             </p>
             <ul className="mt-4 space-y-2 text-sm">
@@ -57,7 +57,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-center gap-1 text-muted transition-colors hover:text-paper"
+                    className="group inline-flex min-h-6 items-center gap-1 text-muted transition-colors hover:text-paper"
                   >
                     {social.label}
                     <ArrowUpRight
@@ -71,7 +71,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}
           </p>

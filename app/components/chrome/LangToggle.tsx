@@ -14,7 +14,7 @@ export function LangToggle({ className }: { className?: string }) {
       role="group"
       aria-label={t(ui.chrome.toggleLang)}
       className={cx(
-        "flex h-10 items-center rounded-full border border-line p-1",
+        "flex h-11 items-center gap-1 rounded-full border border-line p-1",
         className,
       )}
     >
@@ -26,8 +26,9 @@ export function LangToggle({ className }: { className?: string }) {
             type="button"
             onClick={() => setLang(code)}
             aria-pressed={active}
+            aria-label={code === "id" ? "Bahasa Indonesia" : "English"}
             className={cx(
-              "rounded-full px-2.5 py-1 font-mono text-[0.6rem] uppercase leading-none tracking-[0.14em] transition-colors duration-200",
+              "min-h-8 rounded-full px-3 font-mono text-[0.7rem] uppercase leading-none tracking-[0.14em] transition-colors duration-200",
               active
                 ? "bg-paper text-ink"
                 : "text-muted hover:text-paper",

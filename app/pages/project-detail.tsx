@@ -51,7 +51,7 @@ export default function ProjectDetail() {
     <Container className="max-w-4xl py-16 sm:py-24">
       <Link
         to="/projects"
-        className="group inline-flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-muted transition-colors hover:text-paper"
+        className="group inline-flex min-h-11 items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted transition-colors hover:text-paper"
       >
         <ArrowLeft
           className="size-3.5 transition-transform duration-300 group-hover:-translate-x-1"
@@ -60,7 +60,7 @@ export default function ProjectDetail() {
         {t(ui.project.back)}
       </Link>
 
-      <p className="mt-12 font-mono text-[0.65rem] uppercase tracking-[0.26em] text-muted">
+      <p className="mt-12 font-mono text-[0.7rem] uppercase tracking-[0.26em] text-muted">
         {project.category === "it" ? "IT" : t(ui.project.categoryMultimedia)} ·{" "}
         {project.year} · {t(project.role)}
       </p>
@@ -116,22 +116,22 @@ export default function ProjectDetail() {
         <div className="mt-12 overflow-hidden rounded-2xl border border-line bg-elevated shadow-2xl">
           <div className="flex items-center justify-between border-b border-line bg-surface/80 px-4 py-3 backdrop-blur">
             <div className="flex items-center gap-2">
-              <span className="size-2.5 rounded-full bg-white/20" />
-              <span className="size-2.5 rounded-full bg-white/20" />
-              <span className="size-2.5 rounded-full bg-white/20" />
+              <span className="size-2.5 rounded-full bg-paper/25" aria-hidden="true" />
+              <span className="size-2.5 rounded-full bg-paper/25" aria-hidden="true" />
+              <span className="size-2.5 rounded-full bg-paper/25" aria-hidden="true" />
               {project.links[0]?.href && (
                 <a
                   href={project.links[0].href}
                   target="_blank"
                   rel="noreferrer"
-                  className="ml-2 font-mono text-[0.65rem] text-muted transition-colors hover:text-paper"
+                  className="ml-2 font-mono text-[0.7rem] text-muted transition-colors hover:text-paper"
                 >
                   {project.links[0].href}
                 </a>
               )}
             </div>
             {project.links[0]?.label && (
-              <span className="font-mono text-[0.6rem] uppercase tracking-wider text-muted">
+              <span className="font-mono text-[0.7rem] uppercase tracking-wider text-muted">
                 {project.links[0].label}
               </span>
             )}
@@ -140,6 +140,8 @@ export default function ProjectDetail() {
             <img
               src={project.cover}
               alt={t(project.title)}
+              loading="lazy"
+              decoding="async"
               className="w-full object-cover aspect-[16/10]"
             />
           </div>
@@ -153,7 +155,7 @@ export default function ProjectDetail() {
           { label: t(ui.project.category), value: category },
         ].map((item) => (
           <div key={item.label}>
-            <p className="font-mono text-[0.55rem] uppercase tracking-[0.24em] text-muted">
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.24em] text-muted">
               {item.label}
             </p>
             <p className="mt-1 text-sm">{item.value}</p>

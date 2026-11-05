@@ -47,7 +47,7 @@ export default function Projects() {
         <Reveal delay={60}>
           <div
             className="mt-10 flex flex-wrap items-center gap-2"
-            role="tablist"
+            role="group"
             aria-label={t(ui.projects.filterLabel)}
           >
             {projectCategories.map((category) => {
@@ -56,11 +56,10 @@ export default function Projects() {
                 <button
                   key={category.id}
                   type="button"
-                  role="tab"
-                  aria-selected={isActive}
+                  aria-pressed={isActive}
                   onClick={() => setActive(category.id)}
                   className={cx(
-                    "rounded-full border px-4 py-2 text-sm transition-colors duration-200",
+                    "min-h-11 rounded-full border px-4 text-sm transition-colors duration-200",
                     isActive
                       ? "border-paper bg-paper text-ink"
                       : "border-line text-muted hover:border-paper/40 hover:text-paper",
@@ -73,7 +72,10 @@ export default function Projects() {
           </div>
         </Reveal>
 
-        <p className="mt-6 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
+        <p
+          className="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted"
+          aria-live="polite"
+        >
           {filtered.length} {t(ui.projects.shown)}
         </p>
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
   Award,
@@ -6,6 +6,8 @@ import {
   Download,
   Eye,
   FileText,
+  Info,
+  Scale,
   ShieldCheck,
   X,
 } from "lucide-react";
@@ -18,6 +20,7 @@ import { certificates } from "@/content/certificates";
 import { hakiList } from "@/content/haki";
 import { publications } from "@/content/publications";
 import { ui } from "@/content/ui";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { useLang, useLocalizedTitle } from "@/lib/i18n";
 
 export const meta: Route.MetaFunction = () => [
@@ -46,14 +49,19 @@ export default function Certificates() {
     isHaki?: boolean;
   } | null>(null);
 
-  // Close modal on Escape key
+  // Dialog accessibility: trap focus, close on Escape, restore focus, lock scroll.
+  const dialogRef = useFocusTrap<HTMLDivElement>(previewDoc !== null, () =>
+    setPreviewDoc(null),
+  );
+
   useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setPreviewDoc(null);
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+    if (!previewDoc) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [previewDoc]);
 
   return (
     <div className="py-16 sm:py-24">
@@ -92,21 +100,21 @@ export default function Certificates() {
                     {/* Top Meta Bar */}
                     <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
+                        <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
                           {pub.year}
                         </span>
                         <span className="text-muted/40">·</span>
-                        <span className="font-mono text-[0.65rem] font-medium text-paper">
+                        <span className="font-mono text-[0.7rem] font-medium text-paper">
                           {pub.journal}
                         </span>
                         <span className="text-muted/40">·</span>
-                        <span className="font-mono text-[0.6rem] text-muted">
+                        <span className="font-mono text-[0.7rem] text-muted">
                           {pub.volume}
                         </span>
                       </div>
 
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-paper/20 bg-paper/10 px-3 py-1 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-paper">
-                        <span className="size-1.5 rounded-full bg-emerald-400" />
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-paper/20 bg-paper/10 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-paper">
+                        <span className="size-1.5 rounded-full bg-paper" aria-hidden="true" />
                         {t(pub.role)}
                       </span>
                     </div>
@@ -153,7 +161,7 @@ export default function Certificates() {
                       rel="noreferrer"
                       className="group/link inline-flex items-center gap-2 rounded-full border border-line bg-elevated px-4 py-2 font-mono text-xs text-muted transition-colors duration-200 hover:border-paper/50 hover:text-paper"
                     >
-                      <span className="text-[0.65rem] text-muted">DOI:</span>
+                      <span className="text-[0.7rem] text-muted">DOI:</span>
                       <span className="underline decoration-line group-hover/link:decoration-paper">
                         {pub.doi}
                       </span>
@@ -174,7 +182,7 @@ export default function Certificates() {
           <Reveal delay={40}>
             <div className="flex items-center gap-3">
               <span className="flex size-8 items-center justify-center rounded-lg border border-line bg-surface text-paper">
-                <ShieldCheck className="size-4 text-emerald-400" aria-hidden="true" />
+                <ShieldCheck className="size-4 text-paper" aria-hidden="true" />
               </span>
               <div>
                 <h2 className="font-display text-2xl font-bold tracking-[-0.02em]">
@@ -196,21 +204,21 @@ export default function Certificates() {
                     {/* Top Meta Bar */}
                     <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
+                        <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
                           {haki.year}
                         </span>
                         <span className="text-muted/40">·</span>
-                        <span className="font-mono text-[0.65rem] font-medium text-paper">
+                        <span className="font-mono text-[0.7rem] font-medium text-paper">
                           {t(haki.issuer)}
                         </span>
                         <span className="text-muted/40">·</span>
-                        <span className="font-mono text-[0.6rem] text-muted">
+                        <span className="font-mono text-[0.7rem] text-muted">
                           Jenis: {t(haki.type)}
                         </span>
                       </div>
 
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-emerald-400">
-                        <span className="size-1.5 rounded-full bg-emerald-400" />
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-elevated px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted">
+                        <span className="size-1.5 rounded-full bg-paper" aria-hidden="true" />
                         Hak Cipta Terdaftar
                       </span>
                     </div>
@@ -223,24 +231,24 @@ export default function Certificates() {
                     {/* Meta Info Grid */}
                     <dl className="mt-5 grid gap-3 rounded-xl border border-line bg-elevated/60 p-4 sm:grid-cols-2 lg:grid-cols-3">
                       <div>
-                        <dt className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-muted">
-                          Nomor Pencatatan
+                        <dt className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                          {t(ui.certificates.registrationNumber)}
                         </dt>
                         <dd className="mt-1 font-mono text-xs font-semibold text-paper">
                           {haki.registrationNumber}
                         </dd>
                       </div>
                       <div>
-                        <dt className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-muted">
-                          Nomor Permohonan
+                        <dt className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                          {t(ui.certificates.applicationNumber)}
                         </dt>
                         <dd className="mt-1 font-mono text-xs font-semibold text-paper">
                           {haki.applicationNumber}
                         </dd>
                       </div>
                       <div className="sm:col-span-2 lg:col-span-1">
-                        <dt className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-muted">
-                          Pemegang Hak Cipta
+                        <dt className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                          {t(ui.certificates.copyrightHolder)}
                         </dt>
                         <dd className="mt-1 text-xs font-semibold text-paper">
                           {t(haki.holder)}
@@ -251,7 +259,7 @@ export default function Certificates() {
                     {/* Authors / Pencipta */}
                     <p className="mt-4 text-xs leading-relaxed text-muted">
                       <span className="font-mono uppercase tracking-[0.16em] text-muted/70">
-                        Pencipta Terdaftar:{" "}
+                        {t(ui.certificates.registeredCreator)}:{" "}
                       </span>
                       {haki.authors.map((author, i) => (
                         <span key={author}>
@@ -267,8 +275,9 @@ export default function Certificates() {
                       ))}
                     </p>
 
-                    <p className="mt-3 font-mono text-[0.6rem] text-muted/80">
-                      ⚖️ {t(haki.protectionPeriod)}
+                    <p className="mt-3 flex items-center gap-1.5 font-mono text-[0.7rem] text-muted/80">
+                      <Scale className="size-3.5 shrink-0" aria-hidden="true" />
+                      {t(haki.protectionPeriod)}
                     </p>
 
                     {/* Action Buttons */}
@@ -281,7 +290,7 @@ export default function Certificates() {
                           className="group/btn inline-flex items-center gap-2 rounded-full bg-paper px-5 py-2.5 text-xs font-semibold text-ink shadow-md transition duration-200 hover:scale-[1.02] hover:opacity-95"
                         >
                           <FileText className="size-3.5" aria-hidden="true" />
-                          <span>Buka Dokumen PDF Resmi</span>
+                          <span>{t(ui.certificates.openOfficialPdf)}</span>
                           <ArrowUpRight
                             className="size-3.5 transition-transform duration-200 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5"
                             aria-hidden="true"
@@ -303,12 +312,12 @@ export default function Certificates() {
                           className="group/preview inline-flex items-center gap-2 rounded-full border border-line bg-elevated px-4 py-2.5 text-xs font-medium text-paper transition duration-200 hover:border-paper/40 hover:bg-surface"
                         >
                           <Eye className="size-3.5 text-muted transition-colors group-hover/preview:text-paper" aria-hidden="true" />
-                          <span>Pratinjau Bukti (2 Halaman)</span>
+                          <span>{t(ui.certificates.previewProof)}</span>
                         </button>
                       )}
 
-                      <span className="font-mono text-[0.65rem] text-muted">
-                        Dokumen Sah Kemenkumham RI · 260 KB
+                      <span className="font-mono text-[0.7rem] text-muted">
+                        {t(ui.certificates.legalNote)} · 260 KB
                       </span>
                     </div>
                   </div>
@@ -338,31 +347,31 @@ export default function Certificates() {
                           }
                         }}
                         className="group/doc relative cursor-pointer overflow-hidden rounded-xl border border-line bg-elevated p-2 shadow-lg transition-all duration-300 hover:border-paper/50 hover:shadow-2xl"
-                        aria-label="Buka pratinjau bukti dokumen HAKI"
+                        aria-label={t(ui.certificates.openHakiPreview)}
                       >
                         <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg bg-paper/5">
                           <img
                             src={haki.previewImage}
-                            alt="Bukti Dokumen HAKI Kemenkumham RI"
+                            alt={t(ui.certificates.hakiProofAlt)}
                             className="size-full object-cover object-top transition duration-300 group-hover/doc:scale-105"
                             loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-75 transition duration-300 group-hover/doc:opacity-50" />
 
                           <div className="absolute inset-x-3 bottom-3 flex items-center justify-between">
-                            <span className="flex items-center gap-1.5 rounded-full bg-surface/90 px-2.5 py-1 font-mono text-[0.6rem] font-medium text-paper backdrop-blur-md">
-                              <Eye className="size-3" />
-                              Lihat Bukti
+                            <span className="flex items-center gap-1.5 rounded-full bg-surface/90 px-2.5 py-1 font-mono text-[0.7rem] font-medium text-paper backdrop-blur-md">
+                              <Eye className="size-3" aria-hidden="true" />
+                              {t(ui.certificates.viewProof)}
                             </span>
-                            <span className="font-mono text-[0.6rem] text-paper/80 bg-ink/70 rounded-full px-2 py-0.5 backdrop-blur-sm">
-                              2 Hal
+                            <span className="font-mono text-[0.7rem] text-paper/80 bg-ink/70 rounded-full px-2 py-0.5 backdrop-blur-sm">
+                              {t(ui.certificates.twoPages)}
                             </span>
                           </div>
                         </div>
 
-                        <div className="mt-2 flex items-center justify-between px-1 text-[0.6rem]">
+                        <div className="mt-2 flex items-center justify-between px-1 text-[0.7rem]">
                           <span className="font-mono text-muted">No. {haki.registrationNumber}</span>
-                          <span className="font-mono text-emerald-400">Terverifikasi</span>
+                          <span className="font-mono text-muted">{t(ui.chrome.verified)}</span>
                         </div>
                       </div>
                     </div>
@@ -385,7 +394,7 @@ export default function Certificates() {
                   {t(ui.certificates.certificatesHeading)}
                 </h2>
                 <p className="mt-0.5 text-xs text-muted">
-                  Sertifikasi kompetensi profesi BNSP, program nasional Kampus Merdeka, kejuaraan IT, dan praktik industri resmi.
+                  {t(ui.certificates.certificatesSubtitle)}
                 </p>
               </div>
             </div>
@@ -425,7 +434,7 @@ export default function Certificates() {
                         }
                       }}
                       className="group/img relative aspect-[16/10] w-full cursor-pointer overflow-hidden border-b border-line bg-paper/5"
-                      aria-label={`Pratinjau sertifikat ${t(cert.title)}`}
+                      aria-label={`${t(ui.certificates.previewCertificate)} ${t(cert.title)}`}
                     >
                       <img
                         src={cert.previewImage}
@@ -437,14 +446,14 @@ export default function Certificates() {
 
                       {/* Top Badges */}
                       <div className="absolute top-3 left-3">
-                        <span className="rounded-full border border-paper/20 bg-ink/75 px-2.5 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-paper backdrop-blur-sm">
+                        <span className="rounded-full border border-paper/20 bg-ink/75 px-2.5 py-0.5 font-mono text-[0.7rem] uppercase tracking-wider text-paper backdrop-blur-sm">
                           {cert.year}
                         </span>
                       </div>
 
                       {cert.badge && (
                         <div className="absolute top-3 right-3 max-w-[65%]">
-                          <span className="block truncate rounded-full border border-emerald-500/40 bg-ink/85 px-2.5 py-0.5 font-mono text-[0.55rem] font-semibold uppercase tracking-wider text-emerald-400 shadow-sm backdrop-blur-md">
+                          <span className="block truncate rounded-full border border-paper/30 bg-ink/85 px-2.5 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-paper shadow-sm backdrop-blur-md">
                             {t(cert.badge)}
                           </span>
                         </div>
@@ -452,12 +461,12 @@ export default function Certificates() {
 
                       {/* Bottom Overlay Info */}
                       <div className="absolute inset-x-3 bottom-3 flex items-center justify-between">
-                        <span className="flex items-center gap-1.5 rounded-full bg-surface/90 px-2.5 py-1 font-mono text-[0.6rem] font-medium text-paper backdrop-blur-md">
-                          <Eye className="size-3" />
-                          Pratinjau
+                        <span className="flex items-center gap-1.5 rounded-full bg-surface/90 px-2.5 py-1 font-mono text-[0.7rem] font-medium text-paper backdrop-blur-md">
+                          <Eye className="size-3" aria-hidden="true" />
+                          {t(ui.certificates.previewBadge)}
                         </span>
                         {cert.credentialNumber && (
-                          <span className="max-w-[60%] truncate rounded-full bg-ink/75 px-2 py-0.5 font-mono text-[0.55rem] text-paper/80 backdrop-blur-sm">
+                          <span className="max-w-[60%] truncate rounded-full bg-ink/75 px-2 py-0.5 font-mono text-[0.7rem] text-paper/80 backdrop-blur-sm">
                             {cert.credentialNumber}
                           </span>
                         )}
@@ -468,7 +477,7 @@ export default function Certificates() {
                   {/* Card Content */}
                   <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
                     <div>
-                      <span className="font-mono text-[0.6rem] font-medium uppercase tracking-[0.16em] text-paper/70">
+                      <span className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.16em] text-paper/70">
                         {t(cert.category)}
                       </span>
 
@@ -502,8 +511,8 @@ export default function Certificates() {
                         }
                         className="inline-flex items-center gap-1.5 font-mono text-xs text-paper underline decoration-line transition-colors hover:decoration-paper cursor-pointer"
                       >
-                        <Eye className="size-3.5" />
-                        <span>Lihat Sertifikat</span>
+                        <Eye className="size-3.5" aria-hidden="true" />
+                        <span>{t(ui.certificates.viewCertificate)}</span>
                       </button>
 
                       {cert.fileUrl && (
@@ -513,10 +522,13 @@ export default function Certificates() {
                           rel="noreferrer"
                           download
                           className="group/dl inline-flex items-center gap-1 font-mono text-xs text-muted transition-colors hover:text-paper"
-                          title="Buka / Unduh File Resmi"
+                          title={t(ui.certificates.openOfficialFile)}
                         >
-                          <span className="text-[0.65rem]">PDF</span>
-                          <ArrowUpRight className="size-3 transition-transform group-hover/dl:-translate-y-0.5 group-hover/dl:translate-x-0.5" />
+                          <span className="text-[0.7rem]">PDF</span>
+                          <ArrowUpRight
+                            className="size-3 transition-transform group-hover/dl:-translate-y-0.5 group-hover/dl:translate-x-0.5"
+                            aria-hidden="true"
+                          />
                         </a>
                       )}
                     </div>
@@ -530,31 +542,42 @@ export default function Certificates() {
 
       {/* ---------------- Universal Document Preview Modal ---------------- */}
       {previewDoc && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6"
-        >
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-ink/85 backdrop-blur-md transition-opacity"
             onClick={() => setPreviewDoc(null)}
+            aria-hidden="true"
           />
 
           {/* Modal Card */}
-          <div className="relative flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl">
+          <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="doc-preview-title"
+            aria-describedby="doc-preview-subtitle"
+            tabIndex={-1}
+            className="relative flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl outline-none"
+          >
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-line px-5 py-4">
-              <div className="flex items-center gap-2.5">
-                <span className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
-                  <ShieldCheck className="size-4" />
+            <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
+              <div className="flex min-w-0 items-center gap-2.5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-line bg-paper/5 text-paper">
+                  <ShieldCheck className="size-4" aria-hidden="true" />
                 </span>
-                <div className="max-w-md sm:max-w-xl">
-                  <h3 className="line-clamp-1 font-display text-sm font-bold text-paper sm:text-base">
+                <div className="min-w-0 max-w-md sm:max-w-xl">
+                  <h3
+                    id="doc-preview-title"
+                    className="line-clamp-1 font-display text-sm font-bold text-paper sm:text-base"
+                  >
                     {previewDoc.title}
                   </h3>
-                  <p className="line-clamp-1 font-mono text-[0.65rem] text-muted">
-                    {previewDoc.subtitle || "Dokumen Resmi Terverifikasi"}
+                  <p
+                    id="doc-preview-subtitle"
+                    className="line-clamp-1 font-mono text-[0.7rem] text-muted"
+                  >
+                    {previewDoc.subtitle || t(ui.certificates.officialVerified)}
                   </p>
                 </div>
               </div>
@@ -562,48 +585,59 @@ export default function Certificates() {
               <button
                 type="button"
                 onClick={() => setPreviewDoc(null)}
-                className="flex size-8 items-center justify-center rounded-lg border border-line text-muted transition hover:border-paper/40 hover:text-paper cursor-pointer"
-                aria-label="Tutup pratinjau"
+                className="flex size-11 shrink-0 items-center justify-center rounded-full border border-line text-muted transition hover:border-paper/40 hover:text-paper"
+                aria-label={t(ui.certificates.closePreview)}
               >
-                <X className="size-4" />
+                <X className="size-4" aria-hidden="true" />
               </button>
             </div>
 
             {/* Page Tabs / Info & Action Bar */}
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-elevated/40 px-5 py-3">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 {previewDoc.pages.length > 1 ? (
                   previewDoc.pages.map((_, idx) => (
                     <button
                       key={idx}
                       type="button"
+                      aria-pressed={previewDoc.activePage === idx}
                       onClick={() =>
                         setPreviewDoc((prev) =>
                           prev ? { ...prev, activePage: idx } : null
                         )
                       }
-                      className={`rounded-full px-3 py-1 font-mono text-xs transition duration-200 cursor-pointer ${
+                      className={`min-h-11 rounded-full px-3 font-mono text-xs transition duration-200 ${
                         previewDoc.activePage === idx
-                          ? "bg-paper text-ink font-semibold"
+                          ? "bg-paper font-semibold text-ink"
                           : "border border-line bg-surface text-muted hover:text-paper"
                       }`}
                     >
                       {idx === 0 ? (
                         <>
-                          <span className="hidden sm:inline">Hal 1: Sertifikat Hak Cipta</span>
-                          <span className="sm:hidden">Hal 1: Sertifikat</span>
+                          <span className="hidden sm:inline">
+                            {t(ui.certificates.page1Long)}
+                          </span>
+                          <span className="sm:hidden">
+                            {t(ui.certificates.page1Short)}
+                          </span>
                         </>
                       ) : (
                         <>
-                          <span className="hidden sm:inline">Hal 2: Lampiran Pencipta (Dodi)</span>
-                          <span className="sm:hidden">Hal 2: Lampiran</span>
+                          <span className="hidden sm:inline">
+                            {t(ui.certificates.page2Long)}
+                          </span>
+                          <span className="sm:hidden">
+                            {t(ui.certificates.page2Short)}
+                          </span>
                         </>
                       )}
                     </button>
                   ))
                 ) : (
-                  <span className="font-mono text-[0.65rem] sm:text-xs text-muted truncate max-w-[200px] sm:max-w-none">
-                    {previewDoc.note ? `Nomor: ${previewDoc.note}` : "Dokumen Resmi"}
+                  <span className="max-w-[200px] truncate font-mono text-[0.7rem] text-muted sm:max-w-none sm:text-xs">
+                    {previewDoc.note
+                      ? `${t(ui.certificates.documentNumber)}: ${previewDoc.note}`
+                      : t(ui.certificates.officialDocument)}
                   </span>
                 )}
               </div>
@@ -614,11 +648,14 @@ export default function Certificates() {
                   target="_blank"
                   rel="noreferrer"
                   download
-                  className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1 font-mono text-[0.65rem] sm:text-xs text-muted transition hover:border-paper/40 hover:text-paper"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line bg-surface px-3 font-mono text-[0.7rem] text-muted transition hover:border-paper/40 hover:text-paper sm:text-xs"
+                  aria-label={t(ui.certificates.openOfficialPdf)}
                 >
-                  <Download className="size-3" />
-                  <span className="hidden sm:inline">Unduh Dokumen PDF</span>
-                  <span className="sm:hidden">Unduh PDF</span>
+                  <Download className="size-3.5" aria-hidden="true" />
+                  <span className="hidden sm:inline">
+                    {t(ui.certificates.openOfficialPdf)}
+                  </span>
+                  <span className="sm:hidden">{t(ui.chrome.downloadPdf)}</span>
                 </a>
               )}
             </div>
@@ -628,16 +665,21 @@ export default function Certificates() {
               <div className="mx-auto max-w-xl overflow-hidden rounded-xl border border-line/60 bg-paper/5 p-1 shadow-2xl">
                 <img
                   src={previewDoc.pages[previewDoc.activePage]}
-                  alt={`${previewDoc.title} Halaman ${previewDoc.activePage + 1}`}
+                  alt={`${previewDoc.title} — ${t(ui.certificates.pageLabel)} ${previewDoc.activePage + 1}`}
+                  decoding="async"
                   className="w-full rounded-lg object-contain"
                 />
               </div>
 
               {previewDoc.isHaki && previewDoc.activePage === 1 && (
-                <div className="mx-auto mt-4 max-w-xl rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs text-emerald-300">
-                  💡 <strong>Catatan:</strong> Pada Halaman 2 (Lampiran Pencipta), nama{" "}
-                  <strong>DODI DWI RISKIANTO</strong> tercatat resmi pada nomor urut 4
-                  sebagai Pencipta Ciptaan Poster PKM ini.
+                <div className="mx-auto mt-4 flex max-w-xl items-start gap-2 rounded-xl border border-line bg-elevated p-3 text-xs leading-relaxed text-muted">
+                  <Info className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                  <p>
+                    <strong className="text-paper">
+                      {t(ui.certificates.noteLabel)}:
+                    </strong>{" "}
+                    {t(ui.certificates.creatorNote)}
+                  </p>
                 </div>
               )}
             </div>
