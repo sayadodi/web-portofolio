@@ -1,4 +1,4 @@
-import { Camera, Sparkles, Video } from "lucide-react";
+import { Camera, Cpu, Monitor, Sparkles, Video, Wrench } from "lucide-react";
 
 export function SkillIcon({
   name,
@@ -8,6 +8,21 @@ export function SkillIcon({
   className?: string;
 }) {
   const normalized = name.toLowerCase().trim();
+
+  // IT Support & Troubleshooting
+  if (normalized.includes("support") || normalized.includes("troubleshoot")) {
+    return <Wrench className={className} aria-hidden="true" />;
+  }
+
+  // Windows & Systems
+  if (normalized.includes("windows") || normalized.includes("system")) {
+    return <Monitor className={className} aria-hidden="true" />;
+  }
+
+  // Hardware & Peripherals
+  if (normalized.includes("hardware") || normalized.includes("peripheral")) {
+    return <Cpu className={className} aria-hidden="true" />;
+  }
 
   // Python
   if (normalized.includes("python")) {

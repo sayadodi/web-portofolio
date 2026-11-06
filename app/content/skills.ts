@@ -33,6 +33,19 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
+    id: "it_support",
+    label: "IT Support & Systems",
+    caption: {
+      id: "Pemeliharaan sistem, asistensi pengguna, dan pemecahan kendala teknis.",
+      en: "System maintenance, user technical assistance, and troubleshooting.",
+    },
+    skills: [
+      { name: "IT Support & Troubleshooting", level: 3 },
+      { name: "Windows & System Setup", level: 3 },
+      { name: "Hardware & Peripherals", level: 3 },
+    ],
+  },
+  {
     id: "multimedia",
     label: "Multimedia",
     caption: {

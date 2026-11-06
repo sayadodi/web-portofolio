@@ -26,8 +26,8 @@ export const ui = {
     closeCv: { id: "Tutup pratinjau CV", en: "Close CV preview" },
     cvTitle: { id: "Curriculum Vitae (CV) — Dodi Dwi Riskianto", en: "Curriculum Vitae — Dodi Dwi Riskianto" },
     cvSubtitle: {
-      id: "S1 Teknik Informatika · Software Engineer & Multimedia Creative",
-      en: "B.Sc. Informatics · Software Engineer & Multimedia Creative",
+      id: "S1 Teknik Informatika · Software Engineer · Multimedia Creative · IT Support",
+      en: "B.Sc. Informatics · Software Engineer · Multimedia Creative · IT Support",
     },
     openNewTab: { id: "Buka tab baru", en: "Open in new tab" },
     downloadPdf: { id: "Unduh PDF", en: "Download PDF" },
@@ -87,8 +87,8 @@ export const ui = {
     eyebrow: { id: "Karier", en: "Career" },
     title: { id: "Pengalaman.", en: "Experience." },
     description: {
-      id: "Pengalaman profesional di bidang teknologi informasi, kepemimpinan kreatif multimedia, dan kontribusi akademik.",
-      en: "Professional experience across information technology, creative multimedia leadership, and academic contribution.",
+      id: "Pengalaman profesional di bidang teknologi informasi, dukungan teknis operasional (IT Support), kepemimpinan kreatif multimedia, dan kontribusi akademik.",
+      en: "Professional experience across information technology, operational technical support (IT Support), creative multimedia leadership, and academic contribution.",
     },
     experienceHeading: {
       id: "Pengalaman Kerja & Organisasi",

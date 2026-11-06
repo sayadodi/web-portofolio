@@ -38,12 +38,12 @@ export const timeline: TimelineItem[] = [
   },
   {
     period: { id: "Agustus — September 2025", en: "Aug — Sep 2025" },
-    title: { id: "Praktik Kerja Lapangan (PKL) Mahasiswa", en: "Student Field Work Practice (PKL)" },
+    title: { id: "Asisten Pengajar & Praktik Kerja Lapangan", en: "Teaching Assistant & Student Internship" },
     org: { id: "SMK Negeri 2 Kraksaan", en: "SMK Negeri 2 Kraksaan" },
-    roleType: { id: "Praktik Akademik", en: "Academic Internship" },
+    roleType: { id: "Praktik & Asistensi Lab", en: "Lab Assistance & Internship" },
     detail: {
-      id: "Menyelesaikan program PKL akademik dengan evaluasi predikat Baik, berkontribusi dalam pendampingan teknis laboratorium komputer, dokumentasi media kegiatan, dan administrasi penunjang.",
-      en: "Completed academic internship program with a 'Good' evaluation, assisting computer lab technical support, event media documentation, and administrative support.",
+      id: "Menyelesaikan program PKL dengan predikat Baik. Bertindak sebagai asisten pengajar praktikum mobile (Flutter), membantu setup lingkungan kerja komputer lab, pemecahan kendala teknis (troubleshooting error), serta dokumentasi media kegiatan.",
+      en: "Completed academic internship program with a 'Good' evaluation. Served as mobile development teaching assistant (Flutter), assisting computer lab setup, technical troubleshooting/debugging, and media documentation.",
     },
   },
   {
@@ -52,8 +52,18 @@ export const timeline: TimelineItem[] = [
     org: { id: "Kemendikbudristek & LPDP RI", en: "Ministry of Education & LPDP RI" },
     roleType: { id: "Program MBKM", en: "MBKM Program" },
     detail: {
-      id: "Berpartisipasi aktif dalam program nasional Kampus Merdeka untuk mendampingi penguatan literasi, numerasi, dan adaptasi pemanfaatan teknologi digital di lingkungan sekolah sasaran.",
-      en: "Participated in the national Merdeka Campus program supporting literacy, numeracy, and educational technology adoption in assigned schools.",
+      id: "Berpartisipasi aktif dalam program nasional Kampus Merdeka untuk mendampingi penguatan literasi, numerasi, penyiapan perangkat komputer sekolah, serta adaptasi pemanfaatan teknologi digital di sekolah sasaran.",
+      en: "Participated in the national Merdeka Campus program supporting literacy, numeracy, school computer equipment readiness, and educational digital technology adoption.",
+    },
+  },
+  {
+    period: { id: "Januari — Mei 2021", en: "Jan — May 2021" },
+    title: { id: "Staf Magang Data & TI", en: "Data & IT Intern" },
+    org: { id: "Badan Pusat Statistik (BPS) Kabupaten Probolinggo", en: "BPS-Statistics Probolinggo Regency" },
+    roleType: { id: "Magang Instansi", en: "Government Internship" },
+    detail: {
+      id: "Membantu proses entri, verifikasi, dan validasi data sensus/survei statistik secara akurat. Mendukung kelancaran operasional perangkat komputer kantor, printer, instalasi aplikasi internal, serta pencadangan data dokumen harian.",
+      en: "Assisting accurate data entry, verification, and validation of statistical census data. Supported office computer and printer operations, internal software setup, and daily document backups.",
     },
   },
   {

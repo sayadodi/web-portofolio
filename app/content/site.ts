@@ -18,16 +18,16 @@ export const site = {
   /** Wordmark used in the footer. */
   brand: "DODI",
   role: {
-    id: "Software Engineer & Multimedia Creative",
-    en: "Software Engineer & Multimedia Creative",
+    id: "Software Engineer · Multimedia Creative · IT Support",
+    en: "Software Engineer · Multimedia Creative · IT Support",
   } satisfies Localized,
   tagline: {
-    id: "Membangun ekosistem digital yang fungsional, dan merancang visual yang berkesan.",
-    en: "Building functional digital ecosystems, and designing visuals that stay with you.",
+    id: "Membangun ekosistem digital yang fungsional, andal dalam operasional sistem, dan merancang visual yang berkesan.",
+    en: "Building functional digital ecosystems, reliable system operations, and designing memorable visuals.",
   } satisfies Localized,
   intro: {
-    id: "Software engineer dan multimedia creative yang memadukan logika rekayasa perangkat lunak fungsional dengan kepekaan estetika visual yang berkesan.",
-    en: "A software engineer and multimedia creative who blends functional software engineering logic with memorable visual aesthetics.",
+    id: "Software engineer, praktisi multimedia, dan antusias dukungan teknis (IT Support) yang memadukan logika rekayasa perangkat lunak fungsional dengan ketelitian operasional dan kepekaan visual.",
+    en: "A software engineer, multimedia creative, and technical support enthusiast blending functional software engineering with operational precision and visual aesthetics.",
   } satisfies Localized,
   location: { id: "Indonesia", en: "Indonesia" } satisfies Localized,
   email: "dwidr07@gmail.com",
@@ -40,6 +40,6 @@ export const site = {
   stats: [
     { value: "12", label: { id: "Proyek", en: "Projects" } },
     { value: "3+", label: { id: "Tahun", en: "Years" } },
-    { value: "11", label: { id: "Keahlian", en: "Skills" } },
+    { value: "15+", label: { id: "Keahlian", en: "Skills" } },
   ] satisfies Stat[],
 } as const;
